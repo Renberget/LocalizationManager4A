@@ -1,13 +1,11 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LocalizationManagerTool
 {
@@ -16,35 +14,78 @@ namespace LocalizationManagerTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<string> Columns = new List<string>();
+        DataTable dataTable = new DataTable();
 
         public MainWindow()
         {
             InitializeComponent();
-            Columns.Add("id");
-            Columns.Add("en");
-            Columns.Add("fr");
-            Columns.Add("es");
-            Columns.Add("ja");
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("en");
+            dataTable.Columns.Add("fr");
+            dataTable.Columns.Add("es");
+            dataTable.Columns.Add("ja");
 
-            foreach (string column in Columns)
+            dataTable.Rows.Add(["test", "test"]);
+            dataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void Button_New(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Open(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "CSV|*.csv|JSON|*.json|XML|*.xml";
+
+            if (dialog.ShowDialog() == true)
             {
-                //Pour ajouter une colonne à notre datagrid
-                DataGridTextColumn textColumn = new DataGridTextColumn();
-                textColumn.Header = column;
-                textColumn.Binding = new Binding(column);
-                dataGrid.Columns.Add(textColumn);
+                string filename = dialog.FileName;
+                string extension = Path.GetExtension(filename);
+                switch (extension)
+                {
+                    case ".csv":
+                        ImportCsv(filename);
+                        break;
+                    case ".json":
+                        ImportJson(filename);
+                        break;
+                    case ".xml":
+                        ImportXml(filename);
+                        break;
+                }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Export(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "CSV|*.csv|JSON|*.json|XML|*.xml|C# Singleton|*.cs|C++ Singleton|*.hpp";
 
-        }
-
-        private void Button_Edit(object sender, RoutedEventArgs e)
-        {
-
+            if (dialog.ShowDialog() == true)
+            {
+                string filename = dialog.FileName;
+                string extension = Path.GetExtension(filename);
+                switch (extension)
+                {
+                    case ".csv":
+                        ExportCsv(filename);
+                        break;
+                    case ".json":
+                        ExportJson(filename);
+                        break;
+                    case ".xml":
+                        ExportCsv(filename);
+                        break;
+                    case ".cs":
+                        ExportCs(filename);
+                        break;
+                    case ".hpp":
+                        ExportCpp(filename);
+                        break;
+                }
+            }
         }
     }
 }

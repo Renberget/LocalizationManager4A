@@ -8,10 +8,20 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid VerticalAlignment="Top" Margin="0,0,0,-1">
         <Menu VerticalAlignment="Top" Height="22">
-            <Button Content="File" Click="Button_Click"/>
-            <Button Content="Edit" Click="Button_Edit"/>
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="Button_New"/>
+                <MenuItem Header="Open" Click="Button_Open"/>
+                <MenuItem Header="Export">
+                    <MenuItem Header="CSV" Click="Button_Export"/>
+                    <MenuItem Header="JSON" Click="Button_Export"/>
+                    <MenuItem Header="XML" Click="Button_Export"/>
+                    <MenuItem Header="C# Singleton" Click="Button_Export"/>
+                    <MenuItem Header="C++ Singleton" Click="Button_Export"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+            </MenuItem>
         </Menu>
-        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,22,0,0"/>
-
+        <DataGrid Name="dataGrid" Margin="0,22,0,0"/>
     </Grid>
 </Window>
