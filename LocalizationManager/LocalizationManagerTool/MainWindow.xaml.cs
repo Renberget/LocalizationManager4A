@@ -24,8 +24,6 @@ namespace LocalizationManagerTool
             dataTable.Columns.Add("fr");
             dataTable.Columns.Add("es");
             dataTable.Columns.Add("ja");
-
-            dataTable.Rows.Add(["test", "test"]);
             dataGrid.ItemsSource = dataTable.DefaultView;
         }
 
