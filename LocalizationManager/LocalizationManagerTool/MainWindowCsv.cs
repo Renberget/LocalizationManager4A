@@ -16,7 +16,7 @@ namespace LocalizationManagerTool
 
             foreach (string column in parser.ReadFields())
             {
-                dataTable.Columns.Add(column.ToLower(), typeof(string));
+                dataTable.Columns.Add(column, typeof(string));
             }
             
             while (!parser.EndOfData)

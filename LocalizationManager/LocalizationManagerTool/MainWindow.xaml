@@ -12,11 +12,11 @@
                 <MenuItem Header="New" Click="Button_New"/>
                 <MenuItem Header="Open" Click="Button_Open"/>
                 <MenuItem Header="Export">
-                    <MenuItem Header="CSV" Click="Button_Export"/>
-                    <MenuItem Header="JSON" Click="Button_Export"/>
-                    <MenuItem Header="XML" Click="Button_Export"/>
-                    <MenuItem Header="C# Singleton" Click="Button_Export"/>
-                    <MenuItem Header="C++ Singleton" Click="Button_Export"/>
+                    <MenuItem Header="CSV" Click="Button_ExportCsv"/>
+                    <MenuItem Header="JSON" Click="Button_ExportJson"/>
+                    <MenuItem Header="XML" Click="Button_ExportXml"/>
+                    <MenuItem Header="C# Singleton" Click="Button_ExportCs"/>
+                    <MenuItem Header="C++ Singleton" Click="Button_ExportCpp"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">

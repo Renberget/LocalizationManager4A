@@ -57,34 +57,49 @@ namespace LocalizationManagerTool
             }
         }
 
-        private void Button_Export(object sender, RoutedEventArgs e)
+        private void Button_ExportCsv(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "CSV|*.csv|JSON|*.json|XML|*.xml|C# Singleton|*.cs|C++ Singleton|*.hpp";
+            dialog.Filter = "CSV|*.csv";
 
             if (dialog.ShowDialog() == true)
-            {
-                string filename = dialog.FileName;
-                string extension = Path.GetExtension(filename);
-                switch (extension)
-                {
-                    case ".csv":
-                        ExportCsv(filename);
-                        break;
-                    case ".json":
-                        ExportJson(filename);
-                        break;
-                    case ".xml":
-                        ExportCsv(filename);
-                        break;
-                    case ".cs":
-                        ExportCs(filename);
-                        break;
-                    case ".hpp":
-                        ExportCpp(filename);
-                        break;
-                }
-            }
+                ExportCsv(dialog.FileName);
+        }
+
+        private void Button_ExportJson(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JSON|*.json";
+
+            if (dialog.ShowDialog() == true)
+                ExportJson(dialog.FileName);
+        }
+
+        private void Button_ExportXml(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "XML|*.xml";
+
+            if (dialog.ShowDialog() == true)
+                ExportXml(dialog.FileName);
+        }
+
+        private void Button_ExportCs(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "C# Singleton|*.cs";
+
+            if (dialog.ShowDialog() == true)
+                ExportCs(dialog.FileName);
+        }
+
+        private void Button_ExportCpp(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "C++ Singleton|*.hpp";
+
+            if (dialog.ShowDialog() == true)
+                ExportCpp(dialog.FileName);
         }
     }
 }
