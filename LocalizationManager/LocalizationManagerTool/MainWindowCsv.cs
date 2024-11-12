@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualBasic.FileIO;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocalizationManagerTool
 {
@@ -14,19 +8,34 @@ namespace LocalizationManagerTool
     {
         private void ImportCsv(string filename)
         {
-            using (TextFieldParser parser = new TextFieldParser(filename))
+            TextFieldParser parser = new TextFieldParser(filename);
+            parser.SetDelimiters(",", ";");
+
+            if (parser.EndOfData)
+                return;
+
+            foreach (string column in parser.ReadFields())
             {
-                parser.SetDelimiters(",", ";");
-                while (!parser.EndOfData)
-                {
-                    dataTable.Rows.Add(parser.ReadFields());
-                }
+                dataTable.Columns.Add(column.ToLower(), typeof(string));
+            }
+            
+            while (!parser.EndOfData)
+            {
+                dataTable.Rows.Add(parser.ReadFields());
             }
         }
 
         private void ExportCsv(string filename)
         {
             StreamWriter stream = new StreamWriter(filename, false);
+            string columnNames = "";
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                columnNames += column.ColumnName + ';';
+            }
+            columnNames = columnNames.Remove(columnNames.Length - 1, 1);
+            stream.WriteLine(columnNames);
+
             foreach (DataRow row in dataTable.Rows)
             {
                 stream.WriteLine(String.Join(';', row.ItemArray));

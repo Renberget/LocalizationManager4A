@@ -19,17 +19,15 @@ namespace LocalizationManagerTool
         public MainWindow()
         {
             InitializeComponent();
-            dataTable.Columns.Add("id");
-            dataTable.Columns.Add("en");
-            dataTable.Columns.Add("fr");
-            dataTable.Columns.Add("es");
-            dataTable.Columns.Add("ja");
             dataGrid.ItemsSource = dataTable.DefaultView;
+            dataTable.Columns.Add("id", typeof(string));
         }
 
         private void Button_New(object sender, RoutedEventArgs e)
         {
-            
+            dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(string));
+            dataGrid.ItemsSource = dataTable.DefaultView;
         }
 
         private void Button_Open(object sender, RoutedEventArgs e)
@@ -41,6 +39,8 @@ namespace LocalizationManagerTool
             {
                 string filename = dialog.FileName;
                 string extension = Path.GetExtension(filename);
+
+                dataTable = new DataTable();
                 switch (extension)
                 {
                     case ".csv":
@@ -53,6 +53,7 @@ namespace LocalizationManagerTool
                         ImportXml(filename);
                         break;
                 }
+                dataGrid.ItemsSource = dataTable.DefaultView;
             }
         }
 

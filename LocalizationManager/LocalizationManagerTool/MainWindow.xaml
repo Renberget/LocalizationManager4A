@@ -22,6 +22,6 @@
             <MenuItem Header="Edit">
             </MenuItem>
         </Menu>
-        <DataGrid Name="dataGrid" Margin="0,22,0,0"/>
+        <DataGrid Name="dataGrid" Margin="0,22,0,0" AutoGenerateColumns="True"/>
     </Grid>
 </Window>
