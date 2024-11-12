@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LocalizationManagerTool
 {
@@ -10,7 +10,29 @@ namespace LocalizationManagerTool
     {
         private void ExportCs(string filename)
         {
+            StringBuilder content = new StringBuilder();
 
+            content.Append("public class Localization");
+            content.AppendLine();
+            content.Append('{');
+            content.AppendLine();
+
+            if (dataGrid.ItemsSource is DataView dataView)
+            {
+                foreach (DataRowView rowView in dataView)
+                {
+                    for (int i = 1; i < dataView.Table.Columns.Count; i++)
+                    {
+                        content.Append("    string " + dataView.Table.Columns[i] + rowView[0] + " = \"" + rowView[i] + "\";");
+                        content.AppendLine();
+                    }
+                    content.AppendLine();
+                }
+            }
+
+            content.Append('}');
+
+            File.WriteAllText(filename, content.ToString());
         }
     }
 }
