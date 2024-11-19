@@ -28,6 +28,22 @@ namespace LocalizationManagerTool
                     }
                     content.AppendLine();
                 }
+
+                foreach (DataRowView rowView in dataView)
+                {
+                    for (int i = 1; i < dataView.Table.Columns.Count; i++)
+                    {
+                        content.Append("    public string Get" + dataView.Table.Columns[i].ToString().ToUpper() + rowView[0] + "()");
+                        content.AppendLine();
+                        content.Append("    {");
+                        content.AppendLine();
+                        content.Append("        return " + dataView.Table.Columns[i] + rowView[0] + ";");
+                        content.AppendLine();
+                        content.Append("    }");
+                        content.AppendLine();
+                        content.AppendLine();
+                    }
+                }
             }
 
             content.Append('}');
