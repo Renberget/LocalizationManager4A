@@ -54,13 +54,13 @@ namespace LocalizationManagerTool
                         contentHFile.Append("        std::string Get" + dataView.Table.Columns[i].ToString().ToUpper() + rowView[0] + "();");
                         contentHFile.AppendLine();
 
-                        contentCPPFile.Append("    std::string Localization::Get" + dataView.Table.Columns[i].ToString().ToUpper() + rowView[0] + "()");
+                        contentCPPFile.Append("std::string Localization::Get" + dataView.Table.Columns[i].ToString().ToUpper() + rowView[0] + "()");
                         contentCPPFile.AppendLine();
-                        contentCPPFile.Append("    {");
+                        contentCPPFile.Append("{");
                         contentCPPFile.AppendLine();
-                        contentCPPFile.Append("        return " + dataView.Table.Columns[i] + rowView[0] + ";");
+                        contentCPPFile.Append("    return " + dataView.Table.Columns[i] + rowView[0] + ";");
                         contentCPPFile.AppendLine();
-                        contentCPPFile.Append("    }");
+                        contentCPPFile.Append("}");
                         contentCPPFile.AppendLine();
                         contentCPPFile.AppendLine();
                     }
