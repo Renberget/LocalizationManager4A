@@ -20,8 +20,9 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
+                <MenuItem Header="Add Column" Click="AddColumn_Click"/>
             </MenuItem>
         </Menu>
-        <DataGrid Name="dataGrid" Margin="0,22,0,0" AutoGenerateColumns="True"/>
+        <DataGrid Name="dataGrid" Margin="0,22,0,0" AutoGenerateColumns="True" CanUserDeleteRows="True"/>
     </Grid>
 </Window>

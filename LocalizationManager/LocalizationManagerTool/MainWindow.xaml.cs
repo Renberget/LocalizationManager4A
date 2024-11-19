@@ -1,11 +1,7 @@
 ﻿using Microsoft.Win32;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace LocalizationManagerTool
 {
@@ -55,6 +51,20 @@ namespace LocalizationManagerTool
                 }
                 dataGrid.ItemsSource = dataTable.DefaultView;
             }
+        }
+
+        private void AddColumn_Click(object sender, RoutedEventArgs e)
+        {
+            AddColumnDialog addColumnDialog = new AddColumnDialog(AddColumn);
+            addColumnDialog.Owner = this;
+            addColumnDialog.ShowDialog();
+        }
+
+        private void AddColumn(string name)
+        {
+            dataTable = dataTable.Clone();
+            dataTable.Columns.Add(name, typeof(string));
+            dataGrid.ItemsSource = dataTable.DefaultView;
         }
 
         private void Button_ExportCsv(object sender, RoutedEventArgs e)
