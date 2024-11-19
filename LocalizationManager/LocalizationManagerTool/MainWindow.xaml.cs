@@ -49,9 +49,6 @@ namespace LocalizationManagerTool
                         ImportXml(filename);
                         break;
                 }
-                LocalizationManager manager = new();
-                manager.LoadFromXml(filename, "fr");
-                dataGrid.ItemsSource = dataTable.DefaultView;
             }
         }
 
