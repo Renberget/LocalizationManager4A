@@ -49,6 +49,7 @@ namespace LocalizationManagerTool
                         ImportXml(filename);
                         break;
                 }
+                dataGrid.ItemsSource = dataTable.DefaultView;
             }
         }
 

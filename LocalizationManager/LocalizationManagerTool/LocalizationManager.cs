@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using System.Diagnostics;
 using System.Xml;
+using Newtonsoft.Json;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 //Used on the game side to load csv/xml/json
 class LocalizationManager
@@ -73,7 +76,12 @@ class LocalizationManager
 
     public void LoadFromJson(string filename, string language)
     {
-        
+        StreamReader streamReader = new StreamReader(filename);
+        JObject root = JObject.Parse(streamReader.ReadToEnd());
+        foreach (KeyValuePair<string, JToken?> pair in root)
+        {
+            dictionary.Add(pair.Key, pair.Value[language].ToString());
+        }
     }
 
     public string? Get(string key)
